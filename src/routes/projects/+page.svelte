@@ -55,7 +55,7 @@
             <a
               href={project.href}
               target="_blank"
-              class="text-rose-400 font-bold text-lg">{project.title}</a
+              class="font-bold text-lg">{project.title}</a
             >
           {:else}
             <h3 class="text-rose-400 font-bold text-lg">{project.title}</h3>
