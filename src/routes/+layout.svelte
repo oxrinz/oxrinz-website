@@ -21,7 +21,7 @@
   </style>
   
   <svelte:head>
-	<title>Oxrinz</title>
+	<title>oxrinz</title>
 	<meta name="description" content="Code poet's portfolio and blog" />
 	<link rel="icon" href="/favicon.ico" />
   </svelte:head>
