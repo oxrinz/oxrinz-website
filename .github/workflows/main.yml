@@ -16,11 +16,12 @@ jobs:
         with:
           extra_nix_config: |
             experimental-features = nix-command flakes
-        
+      
       - name: Build Angular app
         run: |
-          nix-shell --run "npm ci && npm run build --prod"
-        
+          nix-shell --run "npm install"
+          nix-shell --run "npm run build --prod"
+      
       - name: Deploy to NixOS Raspberry Pi
         uses: appleboy/scp-action@master
         with:
@@ -31,7 +32,7 @@ jobs:
           source: "dist/oxrinz-website/*"
           target: "/home/admin/oxrinz-website"
           strip_components: 2
-
+      
       - name: Verify deployment
         uses: appleboy/ssh-action@master
         with:
