@@ -1,4 +1,4 @@
-name: Deploy to NixOS Raspberry Pi
+name: Deployment
 
 on:
   push:
@@ -16,7 +16,7 @@ jobs:
           npm install
           npm run build
       
-      - name: Deploy to NixOS Raspberry Pi
+      - name: Deploy to main
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.PI_HOST }}
