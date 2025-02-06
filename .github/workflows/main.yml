@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: Build Angular app
+      - name: Build SvelteKit app
         run: |
           npm install
           npm run build
@@ -25,4 +25,3 @@ jobs:
           port: 22
           source: "build/*"
           target: "/home/admin/oxrinz-website"
-          strip_components: 2
