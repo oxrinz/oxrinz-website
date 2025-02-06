@@ -33,7 +33,7 @@
 		  <div class="flex flex-col w-full lg:flex-row items-center gap-12">
 			<img class="rounded-full" width="200" height="200" src="/pfp.png" />
 			<div class="w-full">
-			  <h1>Oxrinz</h1>
+			  <h1>oxrinz</h1>
 			  <p class="text-base">Code poet</p>
 			</div>
 		  </div>
