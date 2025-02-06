@@ -1,0 +1,40 @@
+name: Deploy to NixOS Raspberry Pi
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Install Nix
+        uses: cachix/install-nix-action@v22
+        
+      - name: Build Angular app
+        run: |
+          nix-shell --run "npm ci && npm run build --prod"
+        
+      - name: Deploy to NixOS Raspberry Pi
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.PI_HOST }}
+          username: "admin"
+          key: ${{ secrets.PI_SSH_KEY }}
+          port: 22
+          source: "dist/oxrinz-website/*"
+          target: "/home/admin/oxrinz-website"
+          strip_components: 2
+
+      - name: Verify deployment
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.PI_HOST }}
+          username: "admin"
+          key: ${{ secrets.PI_SSH_KEY }}
+          port: 22
+          script: |
+            test -f /home/admin/oxrinz-website/index.html
