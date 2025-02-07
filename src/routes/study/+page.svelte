@@ -45,11 +45,10 @@
     href="https://chromium.googlesource.com/chromiumos/docs/+/master/constants/syscalls.md"
     class="text-base">Linux syscall table<br /></a
   >
-    https://sirinsoftware.com/blog/inside-risc-v-microarchitecture
 </pre>
 
 <style>
   pre {
-    line-height: 0.5;
+    line-height: 0.3;
   }
 </style>
