@@ -15,7 +15,7 @@
     <div class="flex flex-row gap-12">
       <div class="flex flex-col gap-12 w-full">
         <div class="flex flex-col w-full lg:flex-row items-center gap-12">
-          <img class="rounded-full" width="200" height="200" src="/pfp.png" />
+          <img alt="pfp" class="rounded-full" width="200" height="200" src="/pfp.png" />
           <div class="w-full">
             <h1>oxrinz</h1>
             <p class="text-base">Code poet</p>
