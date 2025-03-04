@@ -40,6 +40,12 @@ func (c *WakaTimeClient) GetUserSummary(start, end string) (map[string]interface
 	return c.makeRequest(endpoint)
 }
 
+func (c *WakaTimeClient) GetUserDurations(date string) (map[string]interface{}, error) {
+	endpoint := fmt.Sprintf("/users/current/durations?date%s", date)
+	return c.makeRequest(endpoint)
+}
+
+
 func (c *WakaTimeClient) makeRequest(endpoint string) (map[string]interface{}, error) {
 	url := c.BaseURL + endpoint
 	

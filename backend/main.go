@@ -18,9 +18,11 @@ func main() {
 
 	wakaTimeHandler := NewWakaTimeHandler(config.APIKey)
 	
-	http.HandleFunc("/user", wakaTimeHandler.GetCurrentUserHandler)
-	http.HandleFunc("/stats", wakaTimeHandler.GetUserStatsHandler)
-	http.HandleFunc("/summary", wakaTimeHandler.GetUserSummaryHandler)
+	// remember to remove /api before pushing
+	http.HandleFunc("/api/user", wakaTimeHandler.GetCurrentUserHandler)
+	http.HandleFunc("/api/stats", wakaTimeHandler.GetUserStatsHandler)
+	http.HandleFunc("/api/summary", wakaTimeHandler.GetUserSummaryHandler)
+	http.HandleFunc("/api/durations", wakaTimeHandler.GetUserDurationsHandler)
 	
 	serverAddr := fmt.Sprintf(":%s", config.Port)
 	fmt.Printf("Starting server on port %s...\n", config.Port)

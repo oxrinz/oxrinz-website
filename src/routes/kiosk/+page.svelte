@@ -25,12 +25,22 @@
   var summaries: Summary[] = [];
   var highest = 0;
 
+  function lerpToLightPurple(t: number) {
+    t = Math.max(0, Math.min(1, t));
+    const white = { r: 255, g: 255, b: 255 };
+    const lightPurple = { r: 190, g: 190, b: 220 };
+    const r = Math.round(white.r + (lightPurple.r - white.r) * t);
+    const g = Math.round(white.g + (lightPurple.g - white.g) * t);
+    const b = Math.round(white.b + (lightPurple.b - white.b) * t);
+    return `rgb(${r}, ${g}, ${b})`;
+  }
+
   async function getSummaries(): Promise<Summary[]> {
     const now = new Date();
-    const end = now.toISOString().split("T")[0]; 
+    const end = now.toISOString().split("T")[0];
     const start = new Date(now);
-    start.setDate(start.getDate() - 10);
-    const startDate = start.toISOString().split("T")[0]; 
+    start.setDate(start.getDate() - 6);
+    const startDate = start.toISOString().split("T")[0];
 
     const response = await fetch(`api/summary?start=${startDate}&end=${end}`);
     var handled_data = await response.json();
@@ -53,37 +63,42 @@
 
   onMount(() => {
     updateStats();
-    const intervalId = setInterval(updateStats, 900000);
+    const intervalId = setInterval(updateStats, 9000);
   });
 </script>
 
-<div
-  class="top-0 left-0 w-screen h-screen flex justify-between overflow-hidden absolute"
->
-  <img
-    src="/kiosk.png"
-    alt="Kiosk display"
-    class="max-w-full max-h-full object-contain"
-  />
-</div>
-<div class="h-full w-full flex flex-col justify-end absolute">
-  <!-- Recent activity -->
-  <div class="flex w-full justify-between gap-2">
-    {#each summaries as day, i}
-      <div class="w-full h-full text-center flex flex-col justify-end">
-        <p class="text-xs">
-          {day.grand_total.text}
-        </p>
-        <div
-          style={"height: " +
-            (day.grand_total.total_seconds / highest) * 100 +
-            "px"}
-          class="bg-primary w-full"
-        ></div>
-        <p>
-          {Math.abs(i - 8)}
-        </p>
-      </div>
-    {/each}
+<div class="h-screen w-screen flex">
+  <div class="top-0 left-0 h-screen flex justify-between overflow-hidden">
+    <img
+      src="/kiosk.png"
+      alt="Kiosk display"
+      class="max-w-full max-h-full object-contain"
+    />
+  </div>
+  <div class="h-full flex-grow flex flex-col justify-end px-4 pb-2">
+    <!-- Dominant projects -->
+    <div class="flex w-full justify-between gap-2">
+
+    </div>
+    <!-- Hours spent working -->
+    <div class="flex w-full justify-between gap-2">
+      {#each summaries as day, i}
+        <div class="w-full h-full text-center flex flex-col justify-end">
+          <p class="text-xs">
+            {Math.floor((day.grand_total.total_seconds / 60 / 60) * 10) / 10}hrs
+          </p>
+          <div
+            style={"height: " +
+              (day.grand_total.total_seconds / highest) * 100 +
+              "px; background-color:" +
+              lerpToLightPurple(day.grand_total.total_seconds / highest)}
+            class="w-full"
+          ></div>
+          <p>
+            {Math.abs(i - 8)}
+          </p>
+        </div>
+      {/each}
+    </div>
   </div>
 </div>
