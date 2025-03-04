@@ -33,7 +33,7 @@ jobs:
           key: ${{ secrets.PI_SSH_KEY }}
           port: 22
           source: "backend/*"
-          target: "/home/admin/oxrinz-backend"
+          target: "/home/admin/oxrinz-backend/backend"
 
       - name: Create env file with API key
         uses: appleboy/ssh-action@master
@@ -43,5 +43,5 @@ jobs:
           key: ${{ secrets.PI_SSH_KEY }}
           port: 22
           script: |
-            echo "WAKATIME_KEY=${{ secrets.WAKATIME_KEY }}" > /home/admin/oxrinz-website/.env
-            chmod 600 /home/admin/oxrinz-website/.env
+            echo "WAKATIME_KEY=${{ secrets.WAKATIME_KEY }}" > /home/admin/oxrinz-backend/backend/.env
+            chmod 600 /home/admin/oxrinz-backend/backend/.env

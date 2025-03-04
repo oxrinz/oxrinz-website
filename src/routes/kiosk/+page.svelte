@@ -52,7 +52,7 @@
 </script>
 
 <div
-  class="fixed top-0 left-0 w-screen h-screen bg-black flex justify-between overflow-hidden"
+  class="top-0 left-0 w-screen h-screen flex justify-between overflow-hidden absolute"
 >
   <img
     src="/kiosk.png"
@@ -60,25 +60,25 @@
     class="max-w-full max-h-full object-contain"
   />
 
-  <div class="h-full w-full flex flex-col justify-end">
-    <!-- Recent activity -->
-    <div class="flex w-full justify-between gap-2">
-      {#each summaries as day, i}
-        <div class="w-full h-full text-center flex flex-col justify-end">
-          <p class="text-xs">
-            {day.grand_total.text}
-          </p>
-          <div
-            style={"height: " +
-              (day.grand_total.total_seconds / highest) * 100 +
-              "px"}
-            class="bg-primary w-full"
-          ></div>
-          <p>
-            {Math.abs(i - 8)}
-          </p>
-        </div>
-      {/each}
-    </div>
+</div>
+<div class="h-full w-full flex flex-col justify-end absolute">
+  <!-- Recent activity -->
+  <div class="flex w-full justify-between gap-2">
+    {#each summaries as day, i}
+      <div class="w-full h-full text-center flex flex-col justify-end">
+        <p class="text-xs">
+          {day.grand_total.text}
+        </p>
+        <div
+          style={"height: " +
+            (day.grand_total.total_seconds / highest) * 100 +
+            "px"}
+          class="bg-primary w-full"
+        ></div>
+        <p>
+          {Math.abs(i - 8)}
+        </p>
+      </div>
+    {/each}
   </div>
 </div>
