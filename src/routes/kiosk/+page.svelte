@@ -63,7 +63,7 @@
 
   onMount(() => {
     updateStats();
-    const intervalId = setInterval(updateStats, 9000);
+    const intervalId = setInterval(updateStats, 90000);
   });
 </script>
 
