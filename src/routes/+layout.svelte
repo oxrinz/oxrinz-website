@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import Divider from "$components/divider.svelte";
+  import Divider from "$lib/components/divider.svelte";
   import { Github, Instagram, Twitter, Youtube } from "lucide-svelte";
   import "../app.css";
 </script>

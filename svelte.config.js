@@ -6,6 +6,7 @@ const config = {
   kit: {
     alias: {
       $components: 'src/components',
+      "@/*": "src/lib",
     },
     adapter: adapter({
       fallback: 'index.html',

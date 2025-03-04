@@ -1,28 +1,84 @@
-<div class="fullscreen-container">
+<script lang="ts">
+  import { onMount } from "svelte";
+  interface SummaryStat {
+    name: string;
+    hours: number;
+    minutes: number;
+    seconds: number;
+    text: string;
+    percent: number;
+    total_seconds: number;
+  }
+
+  interface Summary {
+    projects: SummaryStat[];
+    languages: SummaryStat[];
+    grand_total: {
+      text: string;
+      total_seconds: number;
+    };
+  }
+
+  var range: "last_7_days" | "last_30_days" | "last_6_months" | "last_year" =
+    "last_7_days";
+
+  var summaries: Summary[] = [];
+  var highest = 0;
+
+  async function getSummaries(): Promise<Summary[]> {
+    const response = await fetch(`api/summary?range=${range}`);
+    var handled_data = await response.json();
+    return handled_data.data.data;
+  }
+
+  function updateStats() {
+    getSummaries().then((summary_data) => {
+      highest = 0;
+      console.log(summary_data);
+      summaries = summary_data;
+
+      summaries.forEach((summary) => {
+        if (summary.grand_total.total_seconds > highest) {
+          highest = summary.grand_total.total_seconds;
+        }
+      });
+    });
+  }
+
+  onMount(() => {
+    updateStats();
+    const intervalId = setInterval(updateStats, 900000);
+  });
+</script>
+
+<div
+  class="fixed top-0 left-0 w-screen h-screen bg-black flex justify-between overflow-hidden"
+>
   <img
     src="/kiosk.png"
     alt="Kiosk display"
-    class="centered-image"
+    class="max-w-full max-h-full object-contain"
   />
+
+  <div class="h-full w-full flex flex-col justify-end">
+    <!-- Recent activity -->
+    <div class="flex w-full justify-between gap-2">
+      {#each summaries as day, i}
+        <div class="w-full h-full text-center flex flex-col justify-end">
+          <p class="text-xs">
+            {day.grand_total.text}
+          </p>
+          <div
+            style={"height: " +
+              (day.grand_total.total_seconds / highest) * 100 +
+              "px"}
+            class="bg-primary w-full"
+          ></div>
+          <p>
+            {Math.abs(i - 8)}
+          </p>
+        </div>
+      {/each}
+    </div>
+  </div>
 </div>
-
-<style>
-  .fullscreen-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-  }
-
-  .centered-image {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-  }
-</style>
