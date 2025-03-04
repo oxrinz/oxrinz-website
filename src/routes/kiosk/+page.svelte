@@ -26,7 +26,13 @@
   var highest = 0;
 
   async function getSummaries(): Promise<Summary[]> {
-    const response = await fetch(`api/summary?range=${range}`);
+    const now = new Date();
+    const end = now.toISOString().split("T")[0]; 
+    const start = new Date(now);
+    start.setDate(start.getDate() - 10);
+    const startDate = start.toISOString().split("T")[0]; 
+
+    const response = await fetch(`api/summary?start=${startDate}&end=${end}`);
     var handled_data = await response.json();
     return handled_data.data.data;
   }
@@ -59,7 +65,6 @@
     alt="Kiosk display"
     class="max-w-full max-h-full object-contain"
   />
-
 </div>
 <div class="h-full w-full flex flex-col justify-end absolute">
   <!-- Recent activity -->

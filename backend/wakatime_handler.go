@@ -82,9 +82,18 @@ func (h *WakaTimeHandler) GetUserStatsHandler(w http.ResponseWriter, r *http.Req
 }
 
 func (h *WakaTimeHandler) GetUserSummaryHandler(w http.ResponseWriter, r *http.Request) {
+    w.Header().Set("Access-Control-Allow-Origin", "*")
+    w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS")
+    w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
+	if r.Method == "OPTIONS" {
+        w.WriteHeader(http.StatusOK)
+        return
+    }
+
 	start := r.URL.Query().Get("start")
 	end := r.URL.Query().Get("end")
-	
+
 	if start == "" || end == "" {
 		now := time.Now()
 		end = now.Format("2006-01-02")
@@ -95,7 +104,7 @@ func (h *WakaTimeHandler) GetUserSummaryHandler(w http.ResponseWriter, r *http.R
 	if err != nil {
 		response := Response{
 			Status:  "error",
-			Message: "Failed to fetch WakaTime summary: " + err.Error(),
+			Message: "Failed to fetch summary: " + err.Error(),
 		}
 		w.WriteHeader(http.StatusInternalServerError)
 		sendJSONResponse(w, response)
