@@ -121,7 +121,7 @@
       class="max-w-full max-h-full object-contain"
     />
   </div>
-  <div class="h-full flex-grow flex flex-col justify-evenly px-4 pb-2 gap-12">
+  <div class="h-full flex-grow flex flex-col justify-evenly px-4 gap-12">
     <!-- Quick info-->
     <div class="flex w-full justify-between flex-col gap-2">
       <div class="flex justify-between">
