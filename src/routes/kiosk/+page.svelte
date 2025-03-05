@@ -59,6 +59,9 @@
     getSummaries().then(() => {
       highest = 0;
 
+      dominant_languages = []
+      dominant_projects = []
+
       summaries.forEach((summary) => {
         if (summary.grand_total.total_seconds > highest) {
           highest = summary.grand_total.total_seconds;
