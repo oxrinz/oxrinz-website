@@ -30,6 +30,7 @@
   var dominant_projects: DominantStat[] = [];
   var dominant_languages: DominantStat[] = [];
   var highest = 0;
+  var total_all_days = 0;
 
   function lerpToLightPurple(t: number) {
     t = Math.max(0, Math.min(1, t));
@@ -58,11 +59,14 @@
   function updateStats() {
     getSummaries().then(() => {
       highest = 0;
+      total_all_days = 0;
 
       dominant_languages = []
       dominant_projects = []
 
       summaries.forEach((summary) => {
+        total_all_days += summary.grand_total.total_seconds;
+
         if (summary.grand_total.total_seconds > highest) {
           highest = summary.grand_total.total_seconds;
         }
@@ -121,26 +125,29 @@
       class="max-w-full max-h-full object-contain"
     />
   </div>
-  <div class="h-full flex-grow flex flex-col justify-evenly px-4 gap-12">
+  <div class="h-full flex-grow flex flex-col justify-evenly px-4 pb-2 gap-12">
     <!-- Quick info-->
-    <div class="flex w-full justify-between flex-col gap-2">
-      <div class="flex justify-between">
-        <h1 class="text-bold text-xl">
-          Daily average: {Math.round((daily_average / 60 / 60) * 10) / 10} hrs
-        </h1>
-        <h1 class="text-bold text-xl">
-          6 hrs
-        </h1>
+    <div class="flex w-full justify-between gap-2 items-end">
+      <div class="flex w-full justify-between flex-col gap-2">
+        <div class="flex justify-between">
+          <h1 class="text-bold text-xl">
+            Daily average: {Math.round((daily_average / 60 / 60) * 10) / 10} hrs
+          </h1>
+        </div>
+        <div class="relative">
+          <div
+            style={"width: " +
+              Math.min(100, (daily_average / (6 * 60 * 60)) * 100) +
+              "%; background-color:" +
+              lerpToLightPurple(daily_average / highest)}
+            class="h-12 absolute"
+          ></div>
+          <div class="h-12 w-full bg-indigo-200 opacity-25"></div>
+        </div>
       </div>
-      <div class="relative">
-        <div
-          style={"width: " +
-            (daily_average / highest) * 100 +
-            "%; background-color:" +
-            lerpToLightPurple(daily_average / highest)}
-          class="h-12 absolute"
-        ></div>
-        <div class="h-12 w-full bg-indigo-200 opacity-25"></div>
+      <div class="*:text-center w-48">
+        <h1 class="text-2xl">Week total:</h1>
+        <h1 class="text-2xl">{Math.floor((total_all_days / 60 / 60) * 10) / 10}hrs</h1>
       </div>
     </div>
 

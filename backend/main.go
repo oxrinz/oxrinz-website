@@ -20,7 +20,7 @@ func main() {
 	
 	// remember to remove /api before pushing
 	http.HandleFunc("/user", wakaTimeHandler.GetCurrentUserHandler)
-	http.HandleFunc("/stats", wakaTimeHandler.GetUserStatsHandler)
+	http.HandleFunc("/stats", wakaTimeHandler.GetUserStatsHandler) 
 	http.HandleFunc("/summary", wakaTimeHandler.GetUserSummaryHandler)
 	http.HandleFunc("/durations", wakaTimeHandler.GetUserDurationsHandler)
 	
