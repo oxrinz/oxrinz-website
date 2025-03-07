@@ -60,8 +60,8 @@
       highest = 0;
       total_all_days = 0;
 
-      dominant_languages = []
-      dominant_projects = []
+      dominant_languages = [];
+      dominant_projects = [];
 
       summaries.forEach((summary) => {
         total_all_days += summary.grand_total.total_seconds;
@@ -100,9 +100,6 @@
           }
         });
 
-        daily_average = total_all_days / 60 / 60 / 7
-        total_all_days = total_all_days / 60 / 60
-
         dominant_projects = dominant_projects
           .sort((a, b) => b.total_seconds - a.total_seconds)
           .slice(0, 5);
@@ -110,6 +107,9 @@
           .sort((a, b) => b.total_seconds - a.total_seconds)
           .slice(0, 6);
       });
+
+      daily_average = total_all_days / 60 / 60 / 7;
+      total_all_days = total_all_days / 60 / 60;
     });
   }
 
@@ -133,7 +133,7 @@
       <div class="flex w-full justify-between flex-col gap-2">
         <div class="flex justify-between">
           <h1 class="text-bold text-xl">
-            Daily average: {Math.round((daily_average) * 10) / 10} hrs
+            Daily average: {Math.round(daily_average * 10) / 10} hrs
           </h1>
         </div>
         <div class="relative">
@@ -149,7 +149,7 @@
       </div>
       <div class="*:text-center w-48">
         <h1 class="text-2xl">Week total:</h1>
-        <h1 class="text-2xl">{Math.floor((total_all_days) * 10) / 10}hrs</h1>
+        <h1 class="text-2xl">{Math.floor(total_all_days * 10) / 10}hrs</h1>
       </div>
     </div>
 
