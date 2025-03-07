@@ -101,6 +101,7 @@
         });
 
         daily_average = total_all_days / 60 / 60 / 7
+        total_all_days = total_all_days / 60 / 60
 
         dominant_projects = dominant_projects
           .sort((a, b) => b.total_seconds - a.total_seconds)
