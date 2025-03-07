@@ -137,7 +137,7 @@
         <div class="relative">
           <div
             style={"width: " +
-              Math.min(100, (daily_average / (6 * 60 * 60)) * 100) +
+              Math.min(100, (daily_average / (7 * 60 * 60)) * 100) +
               "%; background-color:" +
               lerpToLightPurple(daily_average / highest)}
             class="h-12 absolute"
