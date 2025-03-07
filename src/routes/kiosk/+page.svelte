@@ -53,7 +53,6 @@
     var handled_data = await response.json();
 
     summaries = handled_data.data.data;
-    daily_average = handled_data.data.daily_average.seconds;
   }
 
   function updateStats() {
@@ -101,6 +100,8 @@
           }
         });
 
+        daily_average = total_all_days / 60 / 60 / 7
+
         dominant_projects = dominant_projects
           .sort((a, b) => b.total_seconds - a.total_seconds)
           .slice(0, 5);
@@ -131,15 +132,15 @@
       <div class="flex w-full justify-between flex-col gap-2">
         <div class="flex justify-between">
           <h1 class="text-bold text-xl">
-            Daily average: {Math.round((daily_average / 60 / 60) * 10) / 10} hrs
+            Daily average: {Math.round((daily_average) * 10) / 10} hrs
           </h1>
         </div>
         <div class="relative">
           <div
             style={"width: " +
-              Math.min(100, (daily_average / (7 * 60 * 60)) * 100) +
+              Math.min(100, (daily_average) * 100) +
               "%; background-color:" +
-              lerpToLightPurple(daily_average / highest)}
+              lerpToLightPurple(daily_average / 6)}
             class="h-12 absolute"
           ></div>
           <div class="h-12 w-full bg-indigo-200 opacity-25"></div>
@@ -147,7 +148,7 @@
       </div>
       <div class="*:text-center w-48">
         <h1 class="text-2xl">Week total:</h1>
-        <h1 class="text-2xl">{Math.floor((total_all_days / 60 / 60) * 10) / 10}hrs</h1>
+        <h1 class="text-2xl">{Math.floor((total_all_days) * 10) / 10}hrs</h1>
       </div>
     </div>
 
