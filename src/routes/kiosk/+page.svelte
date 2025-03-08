@@ -30,6 +30,8 @@
   var dominant_projects: DominantStat[] = [];
   var dominant_languages: DominantStat[] = [];
   var highest = 0;
+  var highest_language = 0;
+  var highest_project = 0;
   var total_all_days = 0;
 
   function lerpToLightPurple(t: number) {
@@ -58,6 +60,8 @@
   function updateStats() {
     getSummaries().then(() => {
       highest = 0;
+      highest_language = 0;
+      highest_project = 0;
       total_all_days = 0;
 
       dominant_languages = [];
@@ -87,7 +91,7 @@
 
         summary.languages.forEach((language) => {
           const matching_language = dominant_languages.find(
-            (dom_project) => dom_project.name === language.name,
+            (dom_language) => dom_language.name === language.name,
           );
 
           if (matching_language) {
@@ -99,14 +103,29 @@
             });
           }
         });
-
-        dominant_projects = dominant_projects
-          .sort((a, b) => b.total_seconds - a.total_seconds)
-          .slice(0, 5);
-        dominant_languages = dominant_languages
-          .sort((a, b) => b.total_seconds - a.total_seconds)
-          .slice(0, 6);
       });
+
+      // Sort and slice first
+      dominant_projects = dominant_projects
+        .sort((a, b) => b.total_seconds - a.total_seconds)
+        .slice(0, 5);
+      dominant_languages = dominant_languages
+        .sort((a, b) => b.total_seconds - a.total_seconds)
+        .slice(0, 6);
+        
+      // Find highest values for each category
+      if (dominant_languages.length > 0) {
+        highest_language = dominant_languages[0].total_seconds;
+      }
+      
+      if (dominant_projects.length > 0) {
+        highest_project = dominant_projects[0].total_seconds;
+      }
+      
+      // Avoid division by zero
+      highest = highest || 1;
+      highest_language = highest_language || 1;
+      highest_project = highest_project || 1;
 
       daily_average = total_all_days / 60 / 60 / 7;
       total_all_days = total_all_days / 60 / 60;
@@ -162,9 +181,9 @@
           </p>
           <div
             style={"height: " +
-              (language.total_seconds / highest) * 100 +
+              (language.total_seconds / highest_language) * 100 +
               "px; background-color:" +
-              lerpToLightPurple(language.total_seconds / highest)}
+              lerpToLightPurple(language.total_seconds / highest_language)}
             class="w-full"
           ></div>
           <p class="text-sm mt-1">
@@ -183,9 +202,9 @@
           </p>
           <div
             style={"height: " +
-              (project.total_seconds / highest) * 100 +
+              (project.total_seconds / highest_project) * 100 +
               "px; background-color:" +
-              lerpToLightPurple(project.total_seconds / highest)}
+              lerpToLightPurple(project.total_seconds / highest_project)}
             class="w-full"
           ></div>
           <p class="text-sm mt-1">
