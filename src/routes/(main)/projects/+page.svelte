@@ -11,18 +11,27 @@
 
   export let projects = [
     {
+      title: "Ryuthon",
+      description:
+        "A high level language with low level control. Compiles to LLVM and PTX, with other backends coming in the future. Designed for easy and efficient ML development. Name will more than likely change in the future. I am going to beat PyTorch in performance",
+      date: "03-2025",
+      status: "Fulltime development",
+    },
+    {
       title: "RyuAI",
       description:
         "A collection of low-level AI related stuff. Hardware, library, distributed training. All tied together into a single, grand ballet",
       date: "01-2025",
-      status: "Active",
+      status: "Ongoing project, everything  I do ties back to this repo",
+      href: "https://github.com/oxrinz/ryuai"
     },
     {
       title: "rv32i",
       description:
-        "RISC-V integer only core with a few extensions. In verilog. Also an assembler and C compiler in the future. Maybe a minimal OS on top in the future",
+        "RISC-V integer only core with a few extensions. In verilog. Also an assembler and C compiler for this architecture",
       date: "01-2025",
-      status: "Active",
+      status: "Finished",
+      href: "https://github.com/oxrinz/rv32i",
     },
     {
       title: "RyuPy",
@@ -37,7 +46,7 @@
       description:
         'A vndb "alternative"\nWorks as a great vndb alternative, using the data from vndb with a few extra features and improvements',
       date: "08-2024",
-      status: "In very early alpha & slow development",
+      status: "After 3 remakes, dropped. Most likely not going to be finished",
       href: "https://www.vnvault.com/",
     },
   ];
