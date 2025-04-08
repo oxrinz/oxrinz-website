@@ -5,9 +5,8 @@ export default defineConfig({
 	plugins: [sveltekit()],
 	server: {
 		proxy: {
-		  // This will forward any requests that start with /api to your Go server
 		  '/api': {
-			target: 'http://localhost:8080', // Your Go server address
+			target: 'http://localhost:8080',
 			changeOrigin: true,
 			secure: false
 		  }

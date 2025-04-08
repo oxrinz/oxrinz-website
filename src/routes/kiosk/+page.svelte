@@ -166,25 +166,23 @@
   
   <!-- Conditionally render stats based on showStats value -->
   {#if showStats}
-  <div class="h-full w-[60%] flex justify-between flex-col py-4 px-4 gap-12">
+  <div class="h-full w-[30%] flex justify-between flex-col py-4 gap-12">
     <!-- Quick info-->
     <div class="flex w-full justify-between gap-2 items-end">
-      <div class="flex w-full justify-between flex-col gap-2">
-        <div class="flex justify-between">
-          <p class="text-bold text-x">
-            Daily average: {Math.round(daily_average * 10) / 10} hrs
-          </p>
-        </div>
-        <div class="relative">
+      <div class="flex w-full h-full items-center gap-4">
+        <div class="relative w-full h-full">
           <div
             style={"width: " +
               Math.min(100, (daily_average / 6) * 100) +
               "%; background-color:" +
               lerpToAccent(daily_average / 6)}
-            class="h-12 absolute opacity-25"
+            class="h-12 absolute opacity-25 rounded-r-lg"
           ></div>
-          <div class="h-12 w-full bg-yellow-200 opacity-25"></div>
+          <div class="h-12 w-full bg-yellow-200 opacity-25 rounded-r-lg"></div>
         </div>
+        <p class="text-bold text-x">
+          {Math.round(daily_average * 10) / 10} 
+        </p>
       </div>
     </div>
 
@@ -229,25 +227,20 @@
         </div>
       {/each}
     </div> -->
-
+ 
     <!-- Hours spent working -->
-    <div class="flex w-full justify-between gap-2">
+    <div class="flex w-full h-[30%] flex-col justify-between gap-2">
       {#each summaries as day, i}
-        <div class="w-full h-full text-center flex flex-col justify-end">
-          <p class="text-sm mt-1">
-            {Math.floor((day.grand_total.total_seconds / 60 / 60) * 10) / 10}hrs
-          </p>
+        <div class="w-full h-full text-center flex items-center gap-4">
           <div
-            style={"height: " +
+            style={"width: " +
               (day.grand_total.total_seconds / highest) * 100 +
-              "px; background-color:" +
+              "px; background-color:" + 
               lerpToAccent(day.grand_total.total_seconds / highest)}
-            class="w-full opacity-50"
+            class="w-full opacity-50 h-full rounded-r-md"
           ></div>
           <p class="text-sm mt-1">
-            {new Date(
-              new Date().setDate(new Date().getDate() + i + 1),
-            ).toLocaleDateString("en-US", { weekday: "short" })}
+            {Math.floor((day.grand_total.total_seconds / 60 / 60) * 10) / 10}hrs
           </p>
         </div>
       {/each}
