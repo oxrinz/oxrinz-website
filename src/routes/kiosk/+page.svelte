@@ -229,11 +229,11 @@
     </div> -->
  
     <!-- Hours spent working -->
-    <div class="flex w-full h-[30%] flex-col justify-between gap-2">
+    <div class="flex w-full h-[60%] flex-col justify-between gap-2">
       {#each summaries.slice().reverse() as day, i}
         <div class="w-full h-full text-center flex items-center gap-4">
           <div
-            style={"width: " +
+            style={"width: " + 
               (day.grand_total.total_seconds / highest) * 100 +
               "px; background-color:" + 
               lerpToAccent(day.grand_total.total_seconds / highest)}

@@ -30,6 +30,8 @@
 		"vite": "^6.0.0"
 	},
 	"dependencies": {
+		"@mdx-js/preact": "^3.1.0",
+		"@mdx-js/rollup": "^3.1.0",
 		"chart.js": "^4.4.8",
 		"lucide-react": "^0.477.0",
 		"wakatime-client": "^2.7.0"
