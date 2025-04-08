@@ -230,7 +230,7 @@
  
     <!-- Hours spent working -->
     <div class="flex w-full h-[30%] flex-col justify-between gap-2">
-      {#each summaries as day, i}
+      {#each summaries.slice().reverse() as day, i}
         <div class="w-full h-full text-center flex items-center gap-4">
           <div
             style={"width: " +
