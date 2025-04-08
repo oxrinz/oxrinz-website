@@ -25,6 +25,14 @@
     total_seconds: number;
   }
 
+  // Add state variable to track stats visibility
+  let showStats = true;
+
+  // Function to toggle stats visibility
+  function toggleStats() {
+    showStats = !showStats;
+  }
+
   var summaries: Summary[] = [];
   var daily_average: number = 0;
   var dominant_projects: DominantStat[] = [];
@@ -34,13 +42,13 @@
   var highest_project = 0;
   var total_all_days = 0;
 
-  function lerpToLightPurple(t: number) {
+  function lerpToAccent(t: number) {
     t = Math.max(0, Math.min(1, t));
-    const white = { r: 90, g: 90, b: 140 };
-    const lightPurple = { r: 220, g: 220, b: 250 };
-    const r = Math.round(white.r + (lightPurple.r - white.r) * t);
-    const g = Math.round(white.g + (lightPurple.g - white.g) * t);
-    const b = Math.round(white.b + (lightPurple.b - white.b) * t);
+    const white = { r: 80, g: 60, b: 20 };
+    const accent = { r: 171, g: 133, b: 71 };
+    const r = Math.round(white.r + (accent.r - white.r) * t);
+    const g = Math.round(white.g + (accent.g - white.g) * t);
+    const b = Math.round(white.b + (accent.b - white.b) * t);
     return `rgb(${r}, ${g}, ${b})`;
   }
 
@@ -105,24 +113,21 @@
         });
       });
 
-      // Sort and slice first
       dominant_projects = dominant_projects
         .sort((a, b) => b.total_seconds - a.total_seconds)
-        .slice(0, 5);
+        .slice(0, 3);
       dominant_languages = dominant_languages
         .sort((a, b) => b.total_seconds - a.total_seconds)
-        .slice(0, 6);
-        
-      // Find highest values for each category
+        .slice(0, 4);
+
       if (dominant_languages.length > 0) {
         highest_language = dominant_languages[0].total_seconds;
       }
-      
+
       if (dominant_projects.length > 0) {
         highest_project = dominant_projects[0].total_seconds;
       }
-      
-      // Avoid division by zero
+
       highest = highest || 1;
       highest_language = highest_language || 1;
       highest_project = highest_project || 1;
@@ -138,42 +143,53 @@
   });
 </script>
 
+<!-- Added on:click event handler to the main container -->
 <div class="h-screen w-screen flex">
-  <div class="top-0 left-0 h-screen flex justify-between overflow-hidden">
+  <button 
+    class="absolute w-full h-full z-10 opacity-0 cursor-default"
+    on:click={toggleStats}
+    on:keydown={(e) => e.key === 'Enter' && toggleStats()}
+    aria-label={showStats ? "Hide statistics" : "Show statistics"}
+  ></button>
+  <div
+    class="top-0 left-0 h-screen fixed -z-10 flex justify-between overflow-hidden"
+  >
     <img
-      src="/kiosk.png"
+      src="/kiosk.jpg"
       alt="Kiosk display"
-      class="max-w-full max-h-full object-contain"
+      class="max-w-full max-h-full object-cover opacity-100"
     />
+    <div class="fixed w-full h-full bg-gradient-to-r from-[rgba(10,5,0,0.8)] to-transparent">
+
+    </div>
   </div>
-  <div class="h-full flex-grow flex flex-col justify-evenly px-4 pb-2 gap-12">
+  
+  <!-- Conditionally render stats based on showStats value -->
+  {#if showStats}
+  <div class="h-full w-[60%] flex justify-between flex-col py-4 px-4 gap-12">
     <!-- Quick info-->
     <div class="flex w-full justify-between gap-2 items-end">
       <div class="flex w-full justify-between flex-col gap-2">
         <div class="flex justify-between">
-          <h1 class="text-bold text-xl">
+          <p class="text-bold text-x">
             Daily average: {Math.round(daily_average * 10) / 10} hrs
-          </h1>
+          </p>
         </div>
         <div class="relative">
           <div
             style={"width: " +
               Math.min(100, (daily_average / 6) * 100) +
               "%; background-color:" +
-              lerpToLightPurple(daily_average / 6)}
-            class="h-12 absolute"
+              lerpToAccent(daily_average / 6)}
+            class="h-12 absolute opacity-25"
           ></div>
-          <div class="h-12 w-full bg-indigo-200 opacity-25"></div>
+          <div class="h-12 w-full bg-yellow-200 opacity-25"></div>
         </div>
-      </div>
-      <div class="*:text-center w-48">
-        <h1 class="text-2xl">Week total:</h1>
-        <h1 class="text-2xl">{Math.floor(total_all_days * 10) / 10}hrs</h1>
       </div>
     </div>
 
     <!-- Dominant languages -->
-    <div class="flex w-full justify-between gap-2">
+    <!-- <div class="flex w-full justify-between gap-2">
       {#each dominant_languages as language, i}
         <div class="w-full h-full text-center flex flex-col justify-end">
           <p class="text-sm mt-1">
@@ -183,7 +199,7 @@
             style={"height: " +
               (language.total_seconds / highest_language) * 100 +
               "px; background-color:" +
-              lerpToLightPurple(language.total_seconds / highest_language)}
+              lerpToAccent(language.total_seconds / highest_language)}
             class="w-full"
           ></div>
           <p class="text-sm mt-1">
@@ -191,10 +207,10 @@
           </p>
         </div>
       {/each}
-    </div>
+    </div> -->
 
     <!-- Dominant projects -->
-    <div class="flex w-full justify-between gap-2">
+    <!-- <div class="flex w-full justify-between gap-2">
       {#each dominant_projects as project, i}
         <div class="w-full h-full text-center flex flex-col justify-end">
           <p class="text-sm mt-1">
@@ -204,7 +220,7 @@
             style={"height: " +
               (project.total_seconds / highest_project) * 100 +
               "px; background-color:" +
-              lerpToLightPurple(project.total_seconds / highest_project)}
+              lerpToAccent(project.total_seconds / highest_project)}
             class="w-full"
           ></div>
           <p class="text-sm mt-1">
@@ -212,7 +228,7 @@
           </p>
         </div>
       {/each}
-    </div>
+    </div> -->
 
     <!-- Hours spent working -->
     <div class="flex w-full justify-between gap-2">
@@ -225,8 +241,8 @@
             style={"height: " +
               (day.grand_total.total_seconds / highest) * 100 +
               "px; background-color:" +
-              lerpToLightPurple(day.grand_total.total_seconds / highest)}
-            class="w-full"
+              lerpToAccent(day.grand_total.total_seconds / highest)}
+            class="w-full opacity-50"
           ></div>
           <p class="text-sm mt-1">
             {new Date(
@@ -237,4 +253,12 @@
       {/each}
     </div>
   </div>
+  {/if}
 </div>
+
+
+<style>
+  * {
+    @apply !text-yellow-100;
+  }
+</style>
