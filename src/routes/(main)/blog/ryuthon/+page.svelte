@@ -1,63 +1,60 @@
 <script>
 let code_1 = 
-`fn $add($a, $b) {
-  ret $a + $b
+`fn add(a, b) {
+  ret a + b
 }
 
-$a = $init([3])
-$b = $init([3])
-$c = $init([3])
+a = @ones([3])
+b = @ones([3])
+c = @init([3])
 
-$c = $add($a, $b)
+c = add(a, b)
 
-result = $c
-@print(result)
+@print(c)
 `;
 
 let code_2 = 
-`fn $add($a, $b) {
-  ret $a + $b
+`fn add(a, b) {
+  ret a + b
 }
 `;
 
 let code_3 = 
-`$a = $init([3])
-$b = $init([3])
-$c = $init([3])
+`a = @ones([3])
+b = @ones([3])
+c = @init([3])
 `;
 
 let code_4 = 
-`$c = $add($a, $b)
+`c = add(a, b)
 
-result = $c
 @print(result)
 `;
 
 let code_5 = 
-`$bank = @LayerBank()
-$bank.layer1 = @Linear(2, 5)
-$bank.layer2 = @Linear(5, 3)
+`bank = @LayerBank()
+bank.layer1 = @Linear(2, 5)
+bank.layer2 = @Linear(5, 3)
   
-fn forward($x) {
-  $x = $bank.layer1($x)
-  $x = $bank.layer2($x)
-  return $x
+fn forward(x) {
+  x = bank.layer1(x)
+  x = bank.layer2(x)
+  return x
 }
   
-$input = @arange(0, 2)
-$target = @fill([3], 0)
+input = @arange(0, 2)
+target = @fill([3], 0)
 
-$loss = 99999
-$optim = @SGD(bank)
+loss = 99999
+optim = @SGD(bank)
 
 while (loss > 0.01) {
-  $out = forward($input)
-  $loss = @mse($out, $target)
-  $loss.backward()
-  $optim.step()
-  $back.zero_grad()
-  loss = $loss
-  print()
+  out = forward(input)
+  loss = @mse(out, target)
+  loss.backward()
+  optim.step()
+  back.zero_grad()
+  @print(loss)
 }`;
 
 let code_6 = 
@@ -97,7 +94,6 @@ while (loss > 0.01) {
   }
 </style>
 
--- WIP --
 <h1>Ryuthon</h1>
 I'm making a programming language, here are the basic ideas behind it. 
 It's supposed to replace python for machine learning tasks. 
