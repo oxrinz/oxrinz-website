@@ -84,7 +84,7 @@ Leveraging zig's clarity and python's simplicity, RyuLang will look like a minim
 If you've ever only written Python, you will probably find it overwhelming, but if you're an experienced developer across multiple domains, you will more than likely come to love it.
 <Divider />
 <h2>Architecture</h2>
-As earlier mentioned, RyuLang will compile to an HLO set.
+As mentioned earlier, RyuLang will compile to an HLO set.
 Most likely StableHLO / some sort of explanded version of it to make it easy to integrate with PyTorch and other frameworks.
 This will also allow me to easily add XLA as a backend to RyuLang, in case I ever want to do that.
 <br />
