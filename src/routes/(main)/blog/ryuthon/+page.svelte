@@ -1,6 +1,6 @@
 <script>
-let code_1 = 
-`fn add(a, b) {
+  import Divider from "$lib/components/divider.svelte";
+  let code_1 = `fn add(a, b) {
   ret a + b
 }
 
@@ -12,77 +12,6 @@ c = add(a, b)
 
 @print(c)
 `;
-
-let code_2 = 
-`fn add(a, b) {
-  ret a + b
-}
-`;
-
-let code_3 = 
-`a = @ones([3])
-b = @ones([3])
-c = @init([3])
-`;
-
-let code_4 = 
-`c = add(a, b)
-
-@print(result)
-`;
-
-let code_5 = 
-`bank = @LayerBank()
-bank.layer1 = @Linear(2, 5)
-bank.layer2 = @Linear(5, 3)
-  
-fn forward(x) {
-  x = bank.layer1(x)
-  x = bank.layer2(x)
-  return x
-}
-  
-input = @arange(0, 2)
-target = @fill([3], 0)
-
-loss = 99999
-optim = @SGD(bank)
-
-while (loss > 0.01) {
-  out = forward(input)
-  loss = @mse(out, target)
-  loss.backward()
-  optim.step()
-  back.zero_grad()
-  @print(loss)
-}`;
-
-let code_6 = 
-`$bank = @LayerBank()
-$bank.layer1 = @Linear(2, 5)
-$bank.layer2 = @Linear(5, 3)
-  
-fn forward($x) {
-  $x = $bank.layer1($x)
-  $x = $bank.layer2($x)
-  return $x
-}
-  
-$input = @arange(0, 2)
-$target = @fill([3], 0)
-
-$loss = 99999
-$optim = @SGD(bank)
-
-while (loss > 0.01) {
-  $out = forward($input)
-  $loss = @mse($out, $target)
-  $loss.backward()
-  $optim.step()
-  $back.zero_grad()
-  loss = $loss
-  print()
-}`;
 </script>
 
 <style>
@@ -94,53 +23,68 @@ while (loss > 0.01) {
   }
 </style>
 
-<h1>Ryuthon</h1>
-I'm making a programming language, here are the basic ideas behind it. 
-It's supposed to replace python for machine learning tasks. 
-Obviously, this is not going to happen, but that doesn't mean this is not going to be a completely valid, usable and competitive language.
-<br/>
-<br/>
-It will feel similar to python, with the exception of few opinionated semantics, and the ability to run GPU kernels from within the language. 
-Like python, ryuthon will be expression leaned, function calls among other things will be parsed as expressions, and as such, they will always return a value.
-<br/>
-<br/>
-The language will be compiled to LLVM and PTX, with other gpu backends potentially being added in the future. 
-I'm very excited about XLA, and I'd love to have it as a backend in ryuthon, but that'll take a lot of time and effort to get working.
-<br/>
-<br/>
-<h2>Syntax</h2>
-<pre><code class="">{code_1}</code></pre>
-<br/>
-Alot to break down. First the kernel declaration
-<br/>
-<br/>
-<pre><code class="">{code_2}</code></pre>
-<br/>
-First, the $ sign. 
-It's not a naming convention, the $ sign is built in to the language. 
-It is used to indicate device functions and variables. 
-Function inputs are assumed to be arrays, and their thread and block ids are calculated automatically.
-<br/>
-<br/>
-<pre><code class="">{code_3}</code></pre>
-<br/>
-Variable declarations. The $ sign signify that both, variables and the initialization function calls are device type. Note, that were any of these host type (without the $), the code would not be valid. Although this language is dynamically typed, a variable can only be either device or host in their lifetime. This will be expanded on later.
-<br/>
-<br/>
-<pre><code class="">{code_4}</code></pre>
-<br/>
-Kernel call and result printing. Kernel call is a misleading term, since your whole program will be compiled into a single kernel and sent to the GPU before your program runs. For this reason, it's more accurate to call it kernel function call, but for simplicity and convention, I'll be calling them kernel calls.
-<br/>
-<br/>
-Next line, you see device to host type conversion. As you can see, it is as simple as assigning a host variable to a gpu variable, copying over the data from gpu to cpu. This is done because in the next line, a host function is called, print(). Since print is a host function, the data passed to it has to be explicitly converted to host type before call. 
-<br/>
-<br/>
-<h2>ML Library</h2>
-<pre><code class="">{code_5}</code></pre>
-<br/>
-This is, completely valid code, it'll compile and execute as you'd expect. It's not the way of making a neural network in this langauge, but it is a way.
 
+<h1>RyuLang</h1>
+I'm making a programming language, and I want to list the basic ideas behind it here.
+<br />
+<br />
+This is a serious, although highly uneducated attempt at making a competitive language.
+It was initially supposed to be a small learning project to learn about gpu drivers and low level machine learning, but that was changed when I realized that, if I'm truly going to take on such a big project as making a programming language, might aswell give it my all and at least try to make it actually good.
+<br />
+<br />
+If you see stupid decisions being made, this is why ^.
+<br />
+<br />
+Ryulang is going to be a simple, minimalistic machine learning compiler and language.
+It is exclusively made to write gpu code, (almost) every variable is assumed to exist and be handled on the gpu.
+<Divider />
+<h2>Why a language instead of a library?</h2>
+When I run code, I like to, at least at some level, understand what's going on inside
+my hardware. Running something as delicate as gpu orchestration in a vm feels very
+uncomfortable to me, as it prevents me from having a good deep understanding about
+what's going on under the hood. RyuLang is a machine learning compiler designed to
+fix few opinionated issues I experience when working on ML in python.
+<br />
+<br />
+<h3>1. Python VM</h3>
+It's very good, but when working on something that requires pristine performance,
+VMs add alot of friction. RyuLang will compile to native binaries, allowing you to
+easily inspect your code and optimize it down to the last instruction.
+<br />
+<br />
+<h3>2. Convention over configuration</h3>
+RyuLang won't have a package manager. There is only one ground truth in math, and
+thus, there will be only one solution per given problem. This will allow RyuLang
+to leverage the fact that it's a language, and provide numerous QoL features with
+its syntax. For example, I have ideas for how to make writing data paralellisation
+scripts easier in ways that PyTorch cannot, simply because it's not a language, but
+a library. These are mostly wip thoughts though and I won't showcase them here.
+<br />
+<br />
+<h3>3. Lack of tooling</h3>
+It is very hard to accurately measure anything in PyTorch. RyuLang will come with
+alot of built in tools to reliably, among other things, measure performance, inspect
+control flow and benchmark the insides of your gpu.
+<Divider />
+<h2>Practical usage</h2>
+RyuLang is not designed to be used as a standalone language, but instead, to be used alongside others.
+It will come with a few built in tools, like fs for saving models, but for the most part the language is going to be "incomplete", lacking any kind of standard library.
 <br/>
 <br/>
-<pre><code class="">{code_6}</code></pre>
+I plan to make it easy to be used with Python, with other languages in consideration. Easy bindings and a pip package to easily interface compiled RyuLang code are both on my to-do list.
+Depending on whether you use RyuLang for training or inference, ideally you would write your gpu code in RyuLang, and use python to handle the output and distribute it in your application.
 <br/>
+<br/>
+Aside from being a language, RyuLang will also have its own machine learning IR, allowing you to potentially use it as a PyTorch backend.
+This is unlikely though as I don't plan to spend the rest of my life working on this language.
+<Divider />
+<h2>Syntax</h2>
+I won't show the syntax here, but I will explain my thoughts regarding it.
+In short, RyuLang will be a mixture of zig and python.
+Leveraging zig's clarity and python's simplicity, RyuLang will look like a minimal and readable language.
+If you've ever only written Python, you will probably find it overwhelming, but if you're an experienced developer across multiple domains, you will more than likely come to love it.
+<Divider />
+I have alot of unexplored ideas regarding this langauge, and I will probably update this page as I go.
+<br/>
+<br/>
+<p class="text-neutral-400"><i>Last updated: 14.04.2025</i></p>
