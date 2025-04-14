@@ -23,7 +23,6 @@ c = add(a, b)
   }
 </style>
 
-
 <h1>RyuLang</h1>
 I'm making a programming language, and I want to list the basic ideas behind it here.
 <br />
@@ -83,6 +82,20 @@ I won't show the syntax here, but I will explain my thoughts regarding it.
 In short, RyuLang will be a mixture of zig and python.
 Leveraging zig's clarity and python's simplicity, RyuLang will look like a minimal and readable language.
 If you've ever only written Python, you will probably find it overwhelming, but if you're an experienced developer across multiple domains, you will more than likely come to love it.
+<Divider />
+<h2>Architecture</h2>
+As earlier mentioned, RyuLang will compile to an HLO set.
+Most likely StableHLO / some sort of explanded version of it to make it easy to integrate with PyTorch and other frameworks.
+This will also allow me to easily add XLA as a backend to RyuLang, in case I ever want to do that.
+<br />
+<br />
+The language will be lazy, although hidden lazy, there will be no realize functions, you will only see the computations being done when you need them.
+The tooling will make this seemless though, and you will be able to technically write code without thinking about laziness, although it will be something that would be good to keep in mind.
+<br />
+<br />
+Since this is primarily a learning project, I'd like to write as much as I can from scratch.
+This will potentially include things such as custom drivers.
+I would love to write amd drivers, maybe even nvidia, if I find the time for it.
 <Divider />
 I have alot of unexplored ideas regarding this langauge, and I will probably update this page as I go.
 <br/>
