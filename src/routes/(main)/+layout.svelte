@@ -3,7 +3,15 @@
   import Divider from "$lib/components/divider.svelte";
   import { Github, Instagram, Twitter, Youtube } from "lucide-svelte";
   import "../../app.css";
+  import Prism from 'prismjs';
+  import 'prismjs/themes/prism-tomorrow.css';
+
+  onMount(() => {
+    // Prism.highlightAll();
+  });
 </script>
+
+
 
 <svelte:head>
   <title>oxrinz</title>
@@ -18,7 +26,7 @@
           <img alt="pfp" class="rounded-full" width="200" height="200" src="/pfp.png" />
           <div class="w-full">
             <h1>oxrinz</h1>
-            <p class="text-base">Code poet</p>
+            <p class="text-base">Competitive AI prompter</p>
           </div>
         </div>
 
@@ -63,7 +71,6 @@
             <div class="flex flex-col">
               <a href="/">Home</a>
               <a href="/blog">Blog</a>
-              <a href="/study">Study</a>
               <a href="/projects">Projects</a>
             </div>
           </div>
