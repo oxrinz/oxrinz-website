@@ -16,6 +16,7 @@
     <br />
     A few example cards taken from the deck:
     <br />
+    <br />
   </p>
   <h4>What does it mean for a set S⊆D to be effectively decidable?</h4>
   <p>
