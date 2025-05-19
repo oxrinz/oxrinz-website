@@ -1,1 +1,0 @@
-u gotta put stuff out there don't u

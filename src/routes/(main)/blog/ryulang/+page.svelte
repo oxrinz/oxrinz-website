@@ -1,17 +1,5 @@
 <script>
   import Divider from "$lib/components/divider.svelte";
-  let code_1 = `fn add(a, b) {
-  ret a + b
-}
-
-a = @ones([3])
-b = @ones([3])
-c = @init([3])
-
-c = add(a, b)
-
-@print(c)
-`;
 </script>
 
 <style>
