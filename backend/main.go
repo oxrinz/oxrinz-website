@@ -287,7 +287,7 @@ func main() {
 	http.HandleFunc("/api/stats", wakaTimeHandler.GetUserStatsHandler)
 	http.HandleFunc("/api/summary", wakaTimeHandler.GetUserSummaryHandler)
 	http.HandleFunc("/api/durations", wakaTimeHandler.GetUserDurationsHandler)
-	http.HandleFunc("/api/ws", hub.handleConnection)
+	http.HandleFunc("/ws", hub.handleConnection)
 
 	// Start server
 	serverAddr := fmt.Sprintf(":%s", config.Port)
