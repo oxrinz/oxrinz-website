@@ -20,7 +20,7 @@
     {
       title: "rv32i",
       description:
-        "RISC-V based integer only cpu core with a few extensions. Written in verilog. Also an assembler and C compiler for this architecture written in zig, from scratch",
+        "Pipelined RISC-V based integer only cpu core with a few extensions. Written in verilog. Also an assembler and C compiler for this architecture written in zig, from scratch",
       date: "01.2025",
       status: "Finished",
       href: "https://github.com/oxrinz/rv32i",
@@ -28,10 +28,9 @@
     {
       title: "VNVault",
       description:
-        'A vndb "alternative"\nWorks as a great vndb alternative, using the data from vndb with a few extra features and improvements',
+        'A vndb "alternative". Using the data from vndb with a few extra features and improvements. No longer hosted',
       date: "08.2024",
       status: "After 3 remakes, dropped",
-      href: "https://www.vnvault.com/",
     },
     {
       title: "#%?&$",

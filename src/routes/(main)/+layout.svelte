@@ -70,7 +70,7 @@
 
             <div class="flex flex-col">
               <a href="/">Home</a>
-              <a href="/blog">Blog</a>
+              <!-- <a href="/blog">Blog</a> -->
               <a href="/work">Work</a>
             </div>
           </div>
@@ -81,6 +81,7 @@
 </main>
 
 <style>
+  
   @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap");
 
   * {
