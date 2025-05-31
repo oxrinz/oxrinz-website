@@ -72,7 +72,7 @@
               <a href="/">Home</a>
               <!-- <a href="/blog">Blog</a> -->
               <a href="/work">Work</a>
-              <a href="/anki">Anki</a>
+              <!-- <a href="/anki">Anki</a> -->
             </div>
           </div>
         </div>
