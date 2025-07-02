@@ -13,9 +13,9 @@
     {
       title: "Ryulang",
       description:
-        "A high level machine learning language with low level control. Compiles to LLVM and PTX, with other backends coming in the future. Designed for easy and efficient ML development. Name will more than likely change in the future. I am going to beat PyTorch in performance",
+        "A high level machine learning language with low level control. Compiles to LLVM and PTX, with other backends coming in the future. Designed for easy and efficient ML development. Name will more than likely change in the future.",
       date: "03.2025",
-      status: "Fulltime development",
+      status: "Slow dev",
     },
     {
       title: "rv32i",

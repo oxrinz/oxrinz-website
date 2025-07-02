@@ -45,27 +45,6 @@
               >
                 <Github />
               </a>
-              <a
-                href="https://www.instagram.com/0xrinz/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Instagram />
-              </a>
-              <a
-                href="https://x.com/oxrinzz"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Twitter />
-              </a>
-              <a
-                href="https://www.youtube.com/channel/UCaVBcke4vtLDz6uq9189nXw"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Youtube />
-              </a>
             </div>
 
             <div class="flex flex-col">
