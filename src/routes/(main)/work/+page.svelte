@@ -11,7 +11,7 @@
 
   export let projects = [
     {
-      title: "Ryulang",
+      title: "ryu!",
       description:
         "A high level machine learning language with low level control. Compiles to LLVM and PTX, with other backends coming in the future. Designed for easy and efficient ML development. Name will more than likely change in the future.",
       date: "03.2025",
@@ -62,10 +62,6 @@
           <p class="text-sm text-rose-400/50">({project.date})</p>
         </div>
         <p class="text-base text-rose-200">{project.description}</p>
-        <p class="text-rose-300">
-          <span>Status: </span>
-          <span class="font-bold text-rose-200">{project.status}</span>
-        </p>
       </div>
     {/each}
   </div>

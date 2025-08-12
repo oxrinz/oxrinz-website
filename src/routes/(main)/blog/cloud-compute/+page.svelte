@@ -41,7 +41,11 @@
   tenstorrent on runpod, or any other cloud compute provider. I literally got
   bullied into buying a card just because no one has it up for rent. I don't
   understand why this is the case, there are so many hpc devs seeking a better
-  life, why is there no gpu cloud provider built for this fact.
+  life, why is there no gpu cloud provider built for this fact. Are you saying
+  there is not a single person in the world that's looking to rent a tenstorrent
+  machine, purely for development purposes? You have bounties for thousands of
+  dollars but no way of fulfilling them without spending more than what you'd
+  get from bounties upfront.
 </p>
 <br />
 <br />
