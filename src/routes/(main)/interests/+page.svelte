@@ -39,6 +39,10 @@
       description:
         "Back when I was selling Shopify themes and websites I worked on a UI library called SpireUI. I noticed how any GLSL work was enormously expensive, and wanted to help the community (there were definitely no monetary motives here) by creating a library featuring Avant-Garde shader based React components. It was abandoned after a few months and components. The project strengthened my previous Three.js / shading skills which came in useful later on.",
     },
+    {
+      title: "Nix",
+      description: "I was daily driving Nix for a year. I do not like it.",
+    },
   ];
 </script>
 
