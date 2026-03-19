@@ -23,7 +23,7 @@
     <div class="flex flex-row gap-12">
       <div class="flex flex-col gap-12 w-full">
         <div class="flex flex-col w-full lg:flex-row items-center gap-12">
-          <img alt="pfp" class="rounded-full" width="200" height="200" src="/pfp.png" />
+          <img alt="pfp" class="rounded-full" width="200" height="200" src="/oxrinz.png" />
           <div class="w-full">
             <h1>oxrinz</h1>
             <p class="text-base">Competitive AI prompter</p>
@@ -51,6 +51,7 @@
               <a href="/">Home</a>
               <!-- <a href="/blog">Blog</a> -->
               <a href="/work">Work</a>
+              <a href="/interests">Interests</a>
               <!-- <a href="/anki">Anki</a> -->
             </div>
           </div>
@@ -61,7 +62,7 @@
 </main>
 
 <style>
-  
+
   @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap");
 
   * {

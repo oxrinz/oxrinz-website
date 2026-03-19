@@ -1,0 +1,50 @@
+<script lang="ts">
+  interface Interest {
+    title: string;
+    description?: string;
+    href?: string;
+  }
+
+  const interests: Interest[] = [
+    {
+      title: "rv32i",
+      description:
+        "Pipelined RISC-V based integer only cpu core with a few extensions. Written in verilog. Also an assembler and C compiler for this architecture written in zig, from scratch.",
+      href: "https://github.com/oxrinz/rv32i",
+    },
+    {
+      title: "Zulip",
+      description:
+        "World's worst MILP solver. Honestly I'm not even sure if it's a MILP solver.",
+      href: "https://github.com/oxrinz/rv32i",
+    },
+  ];
+</script>
+
+<svelte:head>
+  <title>Interests</title>
+</svelte:head>
+
+<div class="flex flex-col gap-8">
+  <div class="flex flex-col gap-6">
+    <h1 class="text-2xl font-bold">Interests</h1>
+    <p class="text-rose-200/70">
+      Alongside bigger projects I often tinker with technology. This page is a
+      record of those explorations.
+    </p>
+    {#each interests as interest}
+      <div>
+        {#if interest.href}
+          <a href={interest.href} target="_blank" class="font-bold text-lg"
+            >{interest.title}</a
+          >
+        {:else}
+          <h3 class="text-rose-400 font-bold text-lg">{interest.title}</h3>
+        {/if}
+        {#if interest.description}
+          <p class="text-base text-rose-200">{interest.description}</p>
+        {/if}
+      </div>
+    {/each}
+  </div>
+</div>
