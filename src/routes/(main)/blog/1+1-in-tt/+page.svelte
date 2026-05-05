@@ -9,19 +9,24 @@
   I don't expect anyone to read this, but if you're one of the friends that I
   linked this to, you will need context. Tenstorrent consists of a matrix of
   something called Tensix cores, there's a visualization of the processor
-  [https://github.com/tenstorrent/tt-isa-documentation/tree/main/BlackholeA0](here).
-  We're going to use the T boxes, which represent the aforementioned Tensix
+  <a
+    href="https://github.com/tenstorrent/tt-isa-documentation/tree/main/BlackholeA0"
+    target="_blank"
+    rel="noopener noreferrer">here</a
+  >. We're going to use the T boxes, which represent the aforementioned Tensix
   cores.
 </p>
 <h2>1+1</h2>
 <p>
   Pick an arbitrary tensix core. Any. I'm going to pick the one at (1, 2). Nice.
   That Tensix core has 5 BRISC cores, and a main coprocessor that youre
-  *supposed* to use. We will not be using the coprocessor, that would be way too
-  efficient. Each Tensix has a
-  [https://github.com/tenstorrent/tt-isa-documentation/blob/main/BlackholeA0/TensixTile/SoftReset.md](reset
-  register) which we will need to access in order to get it to execute
-  instructions.
+  <em>supposed</em> to use. We will not be using the coprocessor, that would be
+  way too efficient. Each Tensix has a
+  <a
+    href="https://github.com/tenstorrent/tt-isa-documentation/blob/main/BlackholeA0/TensixTile/SoftReset.md"
+    target="_blank"
+    rel="noopener noreferrer">reset register</a
+  > which we will need to access in order to get it to execute instructions.
 </p>
 <br />
 <br />
@@ -86,7 +91,11 @@ print(f"  val   {val:032b}")`}
 />
 
 <p>
-The register we're reading is the first one that's listed [https://github.com/tenstorrent/tt-isa-documentation/blob/main/BlackholeA0/TensixTile/SoftReset.md](here). The code above prints the reset register state, it should look something like this.
+The register we're reading is the first one that's listed <a
+  href="https://github.com/tenstorrent/tt-isa-documentation/blob/main/BlackholeA0/TensixTile/SoftReset.md"
+  target="_blank"
+  rel="noopener noreferrer">here</a
+>. The code above prints the reset register state, it should look something like this.
 </p>
 
 <CodeBlock
