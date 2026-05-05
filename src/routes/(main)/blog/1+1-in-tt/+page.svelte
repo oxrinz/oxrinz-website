@@ -100,7 +100,7 @@ SOFT_RESET_0 at Tensix (1, 2) = 0x00047800
 The bit of id 11 is the one we care about. It controls the reset state of BRISC which is the first out of 5 baby risc cores in each Tensix core. Plan: we write instructions to the BRISC's instruction memory (after reset pc is set to 0x0), set reset bit to 0, wait for a bit and then finally read the memory it writes to.
 </p>
 <pre>
-<code>
+<code>{String.raw`
 # reset register tlb
 ra = alloc_tlb(fd, TLB_SIZE)
 rm = configure_tlb(fd, ra, TLB_SIZE, TLB_RESET_REG_BASE, 0, 1, 2)
@@ -132,7 +132,7 @@ ctypes.c_uint32.from_buffer(rm, TLB_OFFSET).value = val & ~0x800
 time.sleep(0.01)
 
 print(f"L1[0x100] after:  0x{ctypes.c_uint32.from_buffer(mm, 0x100).value:08x}")
-</code>
+`}</code>
 </pre>
 <p>
 And the result is... 2!
