@@ -77,13 +77,13 @@ m = mmap.mmap(
   the reset register.
 </p>
 <pre>
-<code>
+<code>{String.raw`
 val = ctypes.c_uint32.from_buffer(rm, TLB_OFFSET).value
 print(f"\nSOFT_RESET_0 at Tensix ({X}, {Y}) = 0x{val:08x}")
 print(f"  bit   " + "".join(str((31 - i) // 10) for i in range(32)))
 print(f"        " + "".join(str((31 - i) % 10) for i in range(32)))
 print(f"  val   {val:032b}")
-</code>
+`}</code>
 </pre>
 <p>
 The register we're reading is the first one that's listed [https://github.com/tenstorrent/tt-isa-documentation/blob/main/BlackholeA0/TensixTile/SoftReset.md](here). The code above prints the reset register state, it should look something like this.
