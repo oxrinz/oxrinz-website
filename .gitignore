@@ -21,3 +21,8 @@ Thumbs.db
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# archive upload credentials
+scripts/.archive.env
+.vite-cache
+.archive-local

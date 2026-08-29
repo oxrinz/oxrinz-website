@@ -6,6 +6,9 @@
 	"scripts": {
 		"server": "npm start server.js",
 		"dev": "vite dev",
+		"archive:build": "node scripts/build-archive.mjs",
+		"archive:serve": "scripts/serve-local.sh",
+		"archive:upload": "scripts/upload-archive.sh",
 		"build": "vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",

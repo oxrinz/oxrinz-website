@@ -1,0 +1,10 @@
+{
+  "collections": [
+    {
+      "id": "muramasa",
+      "title": "Full Metal Daemon Muramasa",
+      "note": "Game CG rip — events, backgrounds, sprites, UI",
+      "src": "~/Documents/muramasa cgs"
+    }
+  ]
+}

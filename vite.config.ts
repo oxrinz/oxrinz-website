@@ -3,6 +3,8 @@ import { defineConfig } from 'vite';
 import mdx from '@mdx-js/rollup';
 
 export default defineConfig({
+	// node_modules is root-owned on this machine, so keep vite's cache in the project.
+	cacheDir: '.vite-cache',
 	plugins: [mdx({
 		providerImportSource: '@mdx-js/preact'
 	}), sveltekit()],
