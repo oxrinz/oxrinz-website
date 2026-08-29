@@ -52,7 +52,6 @@
               <!-- <a href="/blog">Blog</a> -->
               <a href="/work">Work</a>
               <a href="/interests">Interests</a>
-              <a href="/archive">Archive</a>
               <!-- <a href="/anki">Anki</a> -->
             </div>
           </div>
